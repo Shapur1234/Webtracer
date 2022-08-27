@@ -1,0 +1,23 @@
+{
+  "name": "webtracer",
+  "collaborators": [
+    "Shapur <48966182+Shapur1234@users.noreply.github.com>"
+  ],
+  "description": "Pathtracer written in rust - runs in the web and includes an editor.",
+  "version": "0.1.0",
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shapur1234/Raytracer"
+  },
+  "files": [
+    "webtracer_bg.wasm",
+    "webtracer.js",
+    "webtracer.d.ts",
+    "LICENSE-MIT",
+    "LICENSE-APACHE"
+  ],
+  "module": "webtracer.js",
+  "types": "webtracer.d.ts",
+  "sideEffects": false
+}
