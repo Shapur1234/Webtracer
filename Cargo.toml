@@ -1,0 +1,65 @@
+[package]
+name = "webtracer"
+description = "Pathtracer written in rust - runs in the web and includes an editor."
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+authors = ["Shapur <48966182+Shapur1234@users.noreply.github.com>"]
+repository = "https://github.com/Shapur1234/Raytracer"
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+opt-level = 3
+lto = true
+
+[profile.dev]
+opt-level = 3
+debug = true
+
+[dependencies]
+console_error_panic_hook = "0.1.7"
+console_log = "0.2.0"
+js-sys = "0.3.59"
+log = "0.4"
+serde_yaml = "0.8.26"
+wasm-bindgen = "0.2.81"
+wasm_thread = "0.2.0"
+num-traits = "0.2.15"
+rand = "0.8.5"
+lazy_static = "1.4.0"
+getrandom = { version = "0.2.7", features = ["js"] }
+serde = { version = "1.0.116", features = [ "derive", "rc", ] }
+
+[dependencies.web-sys]
+version = "0.3.58"
+features = [
+  'console',
+  'Blob',
+  'CanvasRenderingContext2d',
+  'CssStyleDeclaration',
+  'Document',
+  'DomWindowResizeEventDetail',
+  'Element',
+  'Event',
+  'EventListener',
+  'FileReader',
+  'HtmlBodyElement',
+  'HtmlButtonElement',
+  'HtmlCanvasElement',
+  'HtmlElement',
+  'HtmlInputElement',
+  'HtmlSelectElement',
+  'ImageData',
+  'KeyboardEvent',
+  'MouseEvent',
+  'Node',
+  'Performance',
+  'Window',
+]
+
+[build-dependencies]
+convert_case = "0.5.0"
+image = "0.24.3"
+

@@ -1,0 +1,124 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+canvas {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+
+    z-index: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* ---------------------------------------- */
+
+panel {
+    position: absolute;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: top;
+
+    height: 60%;
+    max-width: 500px;
+    width: 30%;
+
+    border: 2px solid black;
+    border-radius: 24px;
+
+    background-color: whitesmoke;
+
+    z-index: 1;
+}
+
+panel_title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    height: 10%;
+}
+
+panel_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-top: 2px solid black;
+    width: 95%;
+}
+
+panel_multi_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    border-top: 2px solid black;
+
+    width: 95%;
+    height: 20%;
+
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+panel_box_sub_line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-height: 20%;
+    width: 100%;
+}
+
+.small_sub_line {
+    height: 15%;
+    width: 100%;
+}
+
+.panel_label {
+    width: 80%;
+}
+
+.panel_input_box {
+    width: 20%;
+    text-align: right;
+}
+
+.panel_input_pos {
+    width: 8%;
+    margin-left: 1%;
+    text-align: center;
+}
+.panel_input_small {
+    width: 8%;
+    text-align: center;
+}
+
+.panel_button {
+    width: 10%;
+}
+
+.progress_bar_box {
+    position: absolute;
+
+    top: 8px;
+    right: 8px;
+
+    z-index: 2;
+}

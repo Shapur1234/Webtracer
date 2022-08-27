@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+        <link rel="stylesheet" href="style.css" />
+
+        <title>Renderer</title>
+    </head>
+    <body>
+        <script type="module">
+            import init, { run } from "./pkg/webtracer.js";
+
+            init().then(() => {
+                run();
+            });
+        </script>
+
+        <canvas id="render_canvas"></canvas>
+
+        <panel id="settings_panel" style="top: 20%; left: 8px">
+            <panel_title>
+                <h1>SETTINGS</h1>
+            </panel_title>
+
+            <panel_multi_box>
+                <panel_box_sub_line>
+                    <h3 class="panel_label" id="scene_label">Scene 0</h3>
+                    <button id="previous_scene" class="panel_button">⬅️</button>
+                    <button
+                        id="next_scene"
+                        class="panel_button"
+                        style="margin-left: 2%"
+                    >
+                        ➡️
+                    </button>
+                </panel_box_sub_line>
+
+                <panel_box_sub_line class="small_sub_line">
+                    <h4 class="panel_label">Download scene to file:</h4>
+                    <button
+                        id="download_scene"
+                        class="panel_button"
+                        style="width: 22%"
+                    >
+                        Download
+                    </button>
+                </panel_box_sub_line>
+
+                <panel_box_sub_line class="small_sub_line">
+                    <h4 class="panel_label">Upload scene from file:</h4>
+                    <input
+                        type="file"
+                        accept=".yaml"
+                        multiple="false"
+                        id="scene_from_file"
+                        class="panel_button"
+                        style="width: 22%"
+                    />
+                </panel_box_sub_line>
+            </panel_multi_box>
+
+            <panel_multi_box style="height: 15%">
+                <panel_box_sub_line style="margin-bottom: 1%">
+                    <h4 class="panel_label">
+                        Resize render view automatically:
+                    </h4>
+                    <input
+                        type="checkbox"
+                        id="auto_resize"
+                        class="panel_input_box"
+                    />
+                </panel_box_sub_line>
+                <panel_box_sub_line class="small_sub_line">
+                    <h4 class="panel_label">View size: (Width, Height):</h4>
+                    <input
+                        type="number"
+                        id="resolution_x"
+                        class="panel_input_small"
+                    />
+                    <input
+                        type="number"
+                        id="resolution_y"
+                        class="panel_input_small"
+                        style="margin-left: 2%"
+                    />
+                </panel_box_sub_line>
+            </panel_multi_box>
+
+            <panel_box>
+                <h4 class="panel_label">Vertical FOV:</h4>
+                <input type="number" id="vfov" class="panel_input_box" />
+            </panel_box>
+
+            <panel_box>
+                <h4 class="panel_label">Rays per pixel - Full [F]:</h4>
+                <input
+                    type="number"
+                    id="samples_per_pixel_full"
+                    class="panel_input_box"
+                />
+            </panel_box>
+
+            <panel_box>
+                <h4 class="panel_label">Rays per pixel - Preview [R]:</h4>
+                <input
+                    type="number"
+                    id="samples_per_pixel_preview"
+                    class="panel_input_box"
+                />
+            </panel_box>
+
+            <panel_box>
+                <h4 class="panel_label">Ray bounce recursion limit:</h4>
+                <input
+                    type="number"
+                    id="ray_bounce_recursion_limit"
+                    class="panel_input_box"
+                />
+            </panel_box>
+        </panel>
+
+        <panel id="object_panel" style="top: 20%; right: 8px">
+            <panel_title>
+                <h1>EDIT OBJECT</h1>
+            </panel_title>
+
+             <panel_box>
+                <h4 class="panel_label">Pos (X, Y, Z):</h4>
+                <input type="number" class="panel_input_pos" id="pos_x" />
+                <input type="number" class="panel_input_pos" id="pos_y" />
+                <input type="number" class="panel_input_pos" id="pos_z" />
+            </panel_box>
+
+
+            <panel_multi_box id="object_multi_box">
+                <panel_box_sub_line style="margin-bottom: 1%">
+                    <h4 class="panel_label">
+                        Object type:
+                    </h4>
+                    <select id="object_type_select" name="object_type" class="panel_input_box">
+                        <option value="sphere">Sphere</option>
+                        <option value="brick">Brick</option>
+                    </select>
+                </panel_box_sub_line>
+
+                <panel_box_sub_line style="margin-bottom: 1%" id="line_object_radius">
+                    <h4 class="panel_label">
+                        Radius:
+                    </h4>
+                    <input type="number" id="object_radius" class="panel_input_box" />
+                </panel_box_sub_line>
+
+                <panel_box_sub_line style="margin-bottom: 1%" id="line_object_size">
+                    <h4 class="panel_label">Size (X, Y, Z):</h4>
+                    <input type="number" class="panel_input_pos" id="size_x" />
+                    <input type="number" class="panel_input_pos" id="size_y" />
+                    <input type="number" class="panel_input_pos" id="size_z" />
+                </panel_box_sub_line>
+            </panel_multi_box>
+
+            <panel_multi_box id="material_multi_box">
+                <panel_box_sub_line style="margin-bottom: 1%">
+                    <h4 class="panel_label">
+                        Material:
+                    </h4>
+                     <select id="material_select" name="material_type" class="panel_input_box">
+                        <option value="lambertian">Lambertian</option>
+                        <option value="metal">Metal</option>
+                        <option value="dielectric">Dielectric</option>
+                        <option value="diffuse_light">Diffuse light</option>
+                    </select>
+                </panel_box_sub_line>
+
+                <panel_box_sub_line style="margin-bottom: 1%" id="line_material_fuzz">
+                    <h4 class="panel_label">
+                        Fuzz:
+                    </h4>
+                    <input type="number" id="material_fuzz" class="panel_input_box" />
+                </panel_box_sub_line>
+
+                <panel_box_sub_line style="margin-bottom: 1%" id="line_material_refraction_index">
+                    <h4 class="panel_label">
+                        Refraction index:
+                    </h4>
+                    <input type="number" id="material_refraction_index" class="panel_input_box" />
+                </panel_box_sub_line>
+            </panel_multi_box>
+
+            <panel_multi_box id="texture_multi_box">
+                <panel_box_sub_line style="margin-bottom: 1%">
+                    <h4 class="panel_label">
+                        Texture type:
+                    </h4>
+                     <select id="texture_select" name="texture_type" class="panel_input_box">
+                        <option value="solid_color">Solid color</option>
+                        <option value="checkered">Checkered</option>
+                        <option value="image">Image</option>
+                    </select>
+                </panel_box_sub_line>
+
+                <panel_box_sub_line style="margin-bottom: 1%" id="line_texture_color">
+                    <h4 class="panel_label">
+                        Color:
+                    </h4>
+                    <input type="color" id="texture_color" class="panel_input_box" />
+                </panel_box_sub_line>
+                
+                <panel_box_sub_line style="margin-bottom: 1%" id="line_texture_color_odd">
+                    <h4 class="panel_label">
+                        Color odd:
+                    </h4>
+                    <input type="color" id="texture_color_odd" class="panel_input_box" />
+                </panel_box_sub_line>
+
+                <panel_box_sub_line style="margin-bottom: 1%" id="line_texture_color_even">
+                    <h4 class="panel_label">
+                        Color even:
+                    </h4>
+                    <input type="color" id="texture_color_even" class="panel_input_box" />
+                </panel_box_sub_line>
+
+                <panel_box_sub_line style="margin-bottom: 1%" id="line_texture_check_size">
+                    <h4 class="panel_label">
+                        Check size:
+                    </h4>
+                    <input type="number" id="texture_check_size" class="panel_input_box" />
+                </panel_box_sub_line>
+
+                <panel_box_sub_line style="margin-bottom: 1%" id="line_texture_image">
+                    <h4 class="panel_label">
+                        Image:
+                    </h4>
+                     <select id="texture_image_select" name="texture_image" class="panel_input_box">
+                        <option value="brick">Brick</option>
+                        <option value="rust">Rust</option>
+                        <option value="earth">Earth</option>
+                        <option value="jupiter">Jupiter</option>
+                        <option value="mars">Mars</option>
+                        <option value="sun">Sun</option>
+                    </select>
+                </panel_box_sub_line>
+            </panel_multi_box>
+        </panel>
+        </panel>
+
+        <div
+            class="progress_bar_box"
+            id="progress_text"
+            style="display: block"
+        ></div>
+    </body>
+</html>
