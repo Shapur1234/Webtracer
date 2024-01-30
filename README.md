@@ -1,7 +1,7 @@
 # [Webtracer](https://shapur1234.github.io/Webtracer/ "Link to live demo (mobile controls not supported)")
  * A pathtracer written in rust - runs in the web and includes an editor 
  * Rendering is parallelized and utilizes all cpu cores
- * You can *easily* edit scenes and move the camera (see [how to use](https://github.com/Shapur1234/Webtracer/edit/main/README.md#how-to-use))
+ * You can *easily* edit scenes and move the camera (see [how to use](https://github.com/Shapur1234/Webtracer/tree/main?tab=readme-ov-file#how-to-use))
  * Based on [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) tutorial series - supports spheres, bricks, lights, image-based textures... 
      * *note: images, due to DOM weirdness, have to be baked into the binary, so if you want to add your custom images, you'll have to rebuild the project (feel free to message me how to do so)*
  * Try out the live demo: [Live Demo](https://shapur1234.github.io/Webtracer/ "Link to live demo (mobile controls not supported)")
